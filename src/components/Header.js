@@ -7,7 +7,6 @@ const Header = () => {
         <div className="ui secondary pointing menu">
             <Link to="/" className="item">Streamy</Link>
             <div className="right menu">
-                <Link to="/stream/new" className="item">SignIn</Link>
                 <Link to="/stream/show" className="item">All Streams</Link>
                 <GoogleAuth />
             </div>
