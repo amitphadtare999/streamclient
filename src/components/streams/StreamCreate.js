@@ -47,7 +47,7 @@ class StreamCreate extends Component {
                     label="Enter description"
                 />
                 <button className="ui button primary">Submit</button>
-                <Link to="/stream/show" className="ui button red">Cancel</Link>
+                <Link to="/" className="ui button red">Cancel</Link>
             </form>
         );
     }
