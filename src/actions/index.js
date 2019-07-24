@@ -24,9 +24,9 @@ export const signOut = () => {
 };
 
 export const createStream = formValue => async (dispatch, getState) => {
-    const { userId } = getState().auth;
+    const {userId} = getState().auth;
 
-    const response = await streams.post('/streams', { ...formValue, userId })
+    const response = await streams.post('/streams', {...formValue, userId})
 
     dispatch({type: CREATE_STREAM, payload: response.data});
 
@@ -34,9 +34,9 @@ export const createStream = formValue => async (dispatch, getState) => {
 };
 
 export const fetchStreams = () => async dispatch => {
-  const response = await streams.get('/streams');
+    const response = await streams.get('/streams');
 
-  dispatch({type: FETCH_STREAMS, payload: response.data});
+    dispatch({type: FETCH_STREAMS, payload: response.data});
 };
 
 export const fetchStream = streamId => async dispatch => {
@@ -45,14 +45,26 @@ export const fetchStream = streamId => async dispatch => {
     dispatch({type: FETCH_STREAM, payload: response.data});
 };
 
-export const editStream = (streamId, formValues) => async dispatch => {
-    const response = await streams.put(`/streams/${streamId}`, formValues);
+export const editStream = (streamId, formValues) => async (dispatch, getState) => {
+    const {userId} = getState().auth;
+
+    const response = await streams.patch(`/streams/${streamId}`, {...formValues, userId});
 
     dispatch({type: EDIT_STREAM, payload: response.data});
+
+    history.push('/');
 };
 
 export const deleteStream = streamId => async dispatch => {
-    const response = await streams.delete(`/streams/${streamId}`);
-    console.log(response);
-    dispatch({type: DELETE_STREAM, payload: streamId});
+    const result = window.confirm('Are you sure you want to delete this stream?');
+
+    if(result) {
+        const response = await streams.delete(`/streams/${streamId}`);
+
+        dispatch({type: DELETE_STREAM, payload: streamId});
+
+        alert('Stream deleted successfully.');
+        history.push('/');
+    }
+
 };

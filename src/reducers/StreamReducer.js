@@ -1,11 +1,5 @@
 import _ from "loadsh";
-import {
-    CREATE_STREAM,
-    FETCH_STREAMS,
-    FETCH_STREAM,
-    DELETE_STREAM,
-    EDIT_STREAM
-} from "../actions/types";
+import { CREATE_STREAM, FETCH_STREAMS, FETCH_STREAM, DELETE_STREAM, EDIT_STREAM } from "../actions/types";
 
 const streamReducer = (state = {}, action) => {
     switch (action.type) {
@@ -27,11 +21,8 @@ const streamReducer = (state = {}, action) => {
         case DELETE_STREAM:
             return _.omit(state,action.payload);
 
-
-
         default:
             return state;
-
     }
 };
 
