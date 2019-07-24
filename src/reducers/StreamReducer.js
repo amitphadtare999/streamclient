@@ -13,9 +13,6 @@ const streamReducer = (state = {}, action) => {
             return {...state, [action.payload.id]: action.payload};
 
         case EDIT_STREAM:
-            // const newState = {...state};
-            // newState[action.payload.id] = action.payload;
-            // return newState;
             return {...state, [action.payload.id]: action.payload};
 
         case DELETE_STREAM:

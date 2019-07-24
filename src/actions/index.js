@@ -56,15 +56,9 @@ export const editStream = (streamId, formValues) => async (dispatch, getState) =
 };
 
 export const deleteStream = streamId => async dispatch => {
-    const result = window.confirm('Are you sure you want to delete this stream?');
+    await streams.delete(`/streams/${streamId}`);
 
-    if(result) {
-        const response = await streams.delete(`/streams/${streamId}`);
+    dispatch({type: DELETE_STREAM, payload: streamId});
 
-        dispatch({type: DELETE_STREAM, payload: streamId});
-
-        alert('Stream deleted successfully.');
-        history.push('/');
-    }
-
+    history.push('/');
 };
